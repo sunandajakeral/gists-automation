@@ -19,10 +19,6 @@ describe("Create Gist API Tests", () => {
       expect(response.body.files["test-file.js"].content).to.deep.equal(
         gistData.files["test-file.js"].content
       );
-
-      // Store the Gist ID for future reference (you can use it in other tests)
-      const gistId = response.body.id;
-      cy.wrap(gistId).as("createdGistId");
     });
   });
 
@@ -46,10 +42,6 @@ describe("Create Gist API Tests", () => {
       expect(response.body.files["test-file-2.js"].content).to.deep.equal(
         gistData.files["test-file-2.js"].content
       );
-
-      // Store the Gist ID for future reference (you can use it in other tests)
-      const gistId = response.body.id;
-      cy.wrap(gistId).as("createdGistId");
     });
   });
 
@@ -67,10 +59,6 @@ describe("Create Gist API Tests", () => {
       expect(response.body.files["test-file.js"].content).to.deep.equal(
         gistData.files["test-file.js"].content
       );
-
-      // Store the Gist ID for future reference (you can use it in other tests)
-      const gistId = response.body.id;
-      cy.wrap(gistId).as("createdGistId");
     });
   });
 
@@ -83,10 +71,6 @@ describe("Create Gist API Tests", () => {
 
       // Validate the response data
       expect(response.body.message).to.eq("Validation Failed");
-
-      // Store the Gist ID for future reference (you can use it in other tests)
-      const gistId = response.body.id;
-      cy.wrap(gistId).as("createdGistId");
     });
   });
 });
