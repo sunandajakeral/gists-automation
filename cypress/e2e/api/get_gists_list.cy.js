@@ -1,5 +1,5 @@
 describe("Read Gist Information", () => {
-  before(() => {
+  beforeEach(() => {
     cy.fixture("gist_content.json").then((fixtureData) => {
       cy.createGistRequest(fixtureData).then((response) => {
         cy.wrap(response.body.id).as("createdGistId");
@@ -39,6 +39,19 @@ describe("Read Gist Information", () => {
       // Assert that the response contains the updated Gist data
       response.body.forEach((responseBody) => {
         expect(responseBody.public).to.equal(false);
+      });
+    });
+  });
+
+  it("TC_010_attempts to retrieve a non-existing gist by ID", function () {
+    cy.get("@createdGistId").then((gistId) => {
+      const nonExistingGist = `${gistId}id`;
+      cy.getGistsListRequest(nonExistingGist, false).then((response) => {
+        // Assert that the response status code is 200 (OK)
+        expect(response.status).to.eq(404);
+
+        // Assert that the response contains the updated Gist data
+        expect(response.body.message).to.equal("Not Found");
       });
     });
   });
