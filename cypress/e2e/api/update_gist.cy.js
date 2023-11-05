@@ -10,7 +10,7 @@ describe("Update Gist API Tests", () => {
     });
   });
 
-  it("Updates contents of a file in a gist", function () {
+  it("TC_011_Updates contents of a file in a gist", function () {
     gistData.files["test-file.js"].content = "Updated";
     cy.get("@createdGistId").then((gistId) => {
       cy.updateGistRequest(gistId, gistData).then((response) => {
