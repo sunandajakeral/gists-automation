@@ -9,13 +9,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+    - name: Cache Node.js dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
 
-      - name: Install dependencies
-        run: npm i
+      - name: Restore Node.js dependencies
+        run: npm ci
 
       - name: Run E2E tests
         run: npm run test:e2e
