@@ -75,4 +75,20 @@ describe("Create Gist API Tests", () => {
       cy.wrap(gistId).as("createdGistId");
     });
   });
+
+  it("TC_04_Attempt to create a gist without required fields", () => {
+    delete gistData.files["test-file.js"];
+    // Make an API request to create a Gist using an access token
+    cy.createGistRequest(gistData, apiUrl, false).then((response) => {
+      // Assert that the response status code is 422 (Unprocessable Entity)
+      expect(response.status).to.eq(422);
+
+      // Validate the response data
+      expect(response.body.message).to.eq("Validation Failed");
+
+      // Store the Gist ID for future reference (you can use it in other tests)
+      const gistId = response.body.id;
+      cy.wrap(gistId).as("createdGistId");
+    });
+  });
 });
