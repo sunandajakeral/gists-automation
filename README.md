@@ -5,10 +5,10 @@ Gists: Use the REST API to list, create, update and delete the public gists on G
 
 # Added
 API tests are added:
-- TC_01_Create a gist with a single file
-- TC_02_Create a gist with multiple files
-- TC_03_Create a public gist
-- TC_04_Attempt to create a gist without required fields
+- TC_01_creates a gist with a single file
+- TC_02_creates a gist with multiple files
+- TC_03_creates a public gist
+- TC_04_attempts to create a gist without required fields
 
 # Run tests
 - Clone the repository to your local
