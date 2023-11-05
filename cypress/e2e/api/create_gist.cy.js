@@ -1,5 +1,3 @@
-// Read the api base url and form the GitHub API endpoint
-const apiUrl = `${Cypress.env("API_BASE_URL")}/gists`;
 let gistData;
 
 describe("Create Gist API Tests", () => {
@@ -10,7 +8,7 @@ describe("Create Gist API Tests", () => {
   });
 
   it("TC_01_Create a gist with a single file", () => {
-    cy.createGistRequest(gistData, apiUrl).then((response) => {
+    cy.createGistRequest(gistData).then((response) => {
       // Assert that the response status code is 201 (Created)
       expect(response.status).to.eq(201);
 
@@ -32,7 +30,7 @@ describe("Create Gist API Tests", () => {
     gistData.files["test-file-2.js"] = {
       content: "Welcome to the World!",
     };
-    cy.createGistRequest(gistData, apiUrl).then((response) => {
+    cy.createGistRequest(gistData).then((response) => {
       // Assert that the response status code is 201 (Created)
       expect(response.status).to.eq(201);
 
@@ -58,7 +56,7 @@ describe("Create Gist API Tests", () => {
   it("TC_03_Create a public gist", () => {
     gistData.public = true;
     // Make an API request to create a Gist using an access token
-    cy.createGistRequest(gistData, apiUrl).then((response) => {
+    cy.createGistRequest(gistData).then((response) => {
       // Assert that the response status code is 201 (Created)
       expect(response.status).to.eq(201);
 
@@ -79,7 +77,7 @@ describe("Create Gist API Tests", () => {
   it("TC_04_Attempt to create a gist without required fields", () => {
     delete gistData.files["test-file.js"];
     // Make an API request to create a Gist using an access token
-    cy.createGistRequest(gistData, apiUrl, false).then((response) => {
+    cy.createGistRequest(gistData, false).then((response) => {
       // Assert that the response status code is 422 (Unprocessable Entity)
       expect(response.status).to.eq(422);
 
