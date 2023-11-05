@@ -1,0 +1,22 @@
+{
+  "name": "gists-automation",
+  "version": "1.0.0",
+  "description": "This repository contains the automated tests for gists functionality.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunandajakeral/gists-automation.git"
+  },
+  "author": "Sunanda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunandajakeral/gists-automation/issues"
+  },
+  "homepage": "https://github.com/sunandajakeral/gists-automation#readme",
+  "devDependencies": {
+    "cypress": "^13.4.0"
+  }
+}
