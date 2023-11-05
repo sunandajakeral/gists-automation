@@ -47,10 +47,10 @@ describe("Read Gist Information", () => {
     cy.get("@createdGistId").then((gistId) => {
       const nonExistingGist = `${gistId}id`;
       cy.getGistsListRequest(nonExistingGist, false).then((response) => {
-        // Assert that the response status code is 200 (OK)
+        // Assert that the response status code is 404 (Not Found)
         expect(response.status).to.eq(404);
 
-        // Assert that the response contains the updated Gist data
+        // Assert if the message equals "Not Found"
         expect(response.body.message).to.equal("Not Found");
       });
     });

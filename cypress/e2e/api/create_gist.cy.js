@@ -7,7 +7,7 @@ describe("Create Gist API Tests", () => {
     );
   });
 
-  it("TC_01_Create a gist with a single file", () => {
+  it("TC_01_creates a gist with a single file", () => {
     cy.createGistRequest(gistData).then((response) => {
       // Assert that the response status code is 201 (Created)
       expect(response.status).to.eq(201);
@@ -22,7 +22,7 @@ describe("Create Gist API Tests", () => {
     });
   });
 
-  it("TC_02_Create a gist with multiple files", () => {
+  it("TC_02_creates a gist with multiple files", () => {
     gistData.files["test-file-2.js"] = {
       content: "Welcome to the World!",
     };
@@ -45,7 +45,7 @@ describe("Create Gist API Tests", () => {
     });
   });
 
-  it("TC_03_Create a public gist", () => {
+  it("TC_03_creates a public gist", () => {
     gistData.public = true;
     // Make an API request to create a Gist using an access token
     cy.createGistRequest(gistData).then((response) => {
@@ -62,7 +62,7 @@ describe("Create Gist API Tests", () => {
     });
   });
 
-  it("TC_04_Attempt to create a gist without required fields", () => {
+  it("TC_04_attempts to create a gist without required fields", () => {
     delete gistData.files["test-file.js"];
     // Make an API request to create a Gist using an access token
     cy.createGistRequest(gistData, false).then((response) => {

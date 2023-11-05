@@ -45,10 +45,10 @@ describe("Update Gist API Tests", () => {
       content: "New file added to an existing gist",
     };
       cy.updateGistRequest("", gistData, false).then((response) => {
-        // Assert that the response status code is 200 (OK)
+        // Assert that the response status code is 404 (Not Found)
         expect(response.status).to.eq(404);
 
-        // Assert if the response contains the new file added
+        // Assert if the message equals "Not Found"
         expect(response.body.message).to.equal("Not Found");
       });
   });
