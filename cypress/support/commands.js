@@ -33,7 +33,7 @@ Cypress.Commands.add(
     cy.request({
       method: "PATCH",
       url: `${apiUrl}/gists/${gistId}`,
-      failOnStatusCode:failOnStatusCode,
+      failOnStatusCode: failOnStatusCode,
       headers: {
         Authorization: `token ${accessToken}`,
       },
@@ -41,3 +41,15 @@ Cypress.Commands.add(
     });
   }
 );
+
+Cypress.Commands.add("deleteGistRequest", (gistId, failOnStatusCode = true) => {
+  // Make an API request to delete the Gist
+  cy.request({
+    method: "DELETE",
+    url: `${apiUrl}/gists/${gistId}`,
+    failOnStatusCode: failOnStatusCode,
+    headers: {
+      Authorization: `token ${accessToken}`,
+    },
+  });
+});
