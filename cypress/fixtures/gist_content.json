@@ -1,0 +1,9 @@
+{
+  "description": "Cypress Test Gist",
+  "public": false,
+  "files": {
+    "test-file.js": {
+      "content": "Welcome"
+    }
+  }
+}
