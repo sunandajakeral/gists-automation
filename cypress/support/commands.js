@@ -53,3 +53,15 @@ Cypress.Commands.add("deleteGistRequest", (gistId, failOnStatusCode = true) => {
     },
   });
 });
+
+Cypress.Commands.add("getGistsListRequest", (gist, failOnStatusCode = true) => {
+  // Make an API request to get the Gists List
+  cy.request({
+    method: "GET",
+    url: `${apiUrl}/gists/${gist}`,
+    failOnStatusCode: failOnStatusCode,
+    headers: {
+      Authorization: `token ${accessToken}`,
+    },
+  });
+});
