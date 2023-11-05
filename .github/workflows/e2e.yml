@@ -9,7 +9,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-    - name: Cache Node.js dependencies
+      - name: Cache Node.js dependencies
         uses: actions/cache@v2
         with:
           path: ~/.npm
