@@ -1,4 +1,6 @@
-describe("Update Gist API Tests", () => {
+let gistData;
+
+describe("Delete Gist API Tests", () => {
   beforeEach(() => {
     cy.fixture("gist_content.json").then((fixtureData) => {
       gistData = fixtureData;
@@ -16,5 +18,13 @@ describe("Update Gist API Tests", () => {
         expect(response.status).to.eq(204);
       });
     });
+  });
+
+  it("TC_017_attempts to delete a non-existing gist", function () {
+      // Make an API request to delete the Gist
+      cy.deleteGistRequest("", false).then((response) => {
+        // Assert that the response status code is 204
+        expect(response.status).to.eq(404);
+      });
   });
 });
