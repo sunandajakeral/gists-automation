@@ -27,7 +27,19 @@ describe("Read Gist Information", () => {
       // Assert that the response contains the updated Gist data
       response.body.forEach((responseBody) => {
         expect(responseBody.public).to.equal(true);
-      })
+      });
+    });
+  });
+
+  it("TC_008_lists gists for a autheticated user", function () {
+    cy.getGistsListAuthenticatedUser().then((response) => {
+      // Assert that the response status code is 200 (OK)
+      expect(response.status).to.eq(200);
+
+      // Assert that the response contains the updated Gist data
+      response.body.forEach((responseBody) => {
+        expect(responseBody.public).to.equal(false);
+      });
     });
   });
 });
