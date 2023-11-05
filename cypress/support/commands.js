@@ -65,3 +65,15 @@ Cypress.Commands.add("getGistsListRequest", (gist, failOnStatusCode = true) => {
     },
   });
 });
+
+Cypress.Commands.add("getGistsListAuthenticatedUser", (failOnStatusCode = true) => {
+  // Make an API request to get the Gists List
+  cy.request({
+    method: "GET",
+    url: `${apiUrl}/gists`,
+    failOnStatusCode: failOnStatusCode,
+    headers: {
+      Authorization: `token ${accessToken}`,
+    },
+  });
+});
