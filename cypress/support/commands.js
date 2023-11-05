@@ -9,11 +9,12 @@
 // ***********************************************
 const accessToken = Cypress.env("GITHUB_TOKEN");
 
-Cypress.Commands.add("createGistRequest", (gistData, apiUrl) => {
+Cypress.Commands.add("createGistRequest", (gistData, apiUrl,failOnStatusCode= true) => {
   // Make an API request to create a Gist using an access token
   cy.request({
     method: "POST",
     url: apiUrl,
+    failOnStatusCode: failOnStatusCode,
     headers: {
       Authorization: `token ${accessToken}`,
     },
