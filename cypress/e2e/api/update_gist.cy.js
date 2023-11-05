@@ -39,4 +39,17 @@ describe("Update Gist API Tests", () => {
       });
     });
   });
+
+  it("TC_015_attempts to update a gist that doesn’t exist", function () {
+    gistData.files["test-file-2.js"] = {
+      content: "New file added to an existing gist",
+    };
+      cy.updateGistRequest("", gistData, false).then((response) => {
+        // Assert that the response status code is 200 (OK)
+        expect(response.status).to.eq(404);
+
+        // Assert if the response contains the new file added
+        expect(response.body.message).to.equal("Not Found");
+      });
+  });
 });
