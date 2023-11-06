@@ -22,7 +22,7 @@ describe("Create Gist API Tests", () => {
     });
   });
 
-  it("TC_03_creates a public gist", () => {
+  it.only("TC_03_creates a public gist", () => {
     gistData.public = true;
     // Make an API request to create a Gist using an access token
     cy.createGistRequest(gistData).then((response) => {

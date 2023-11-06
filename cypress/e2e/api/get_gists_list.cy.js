@@ -1,6 +1,9 @@
+const apiUrl = Cypress.env("API_BASE_URL");
+
 describe("Read Gist Information", () => {
   beforeEach(() => {
     cy.fixture("gist_content.json").then((fixtureData) => {
+      fixtureData.public = true;
       cy.createGistRequest(fixtureData).then((response) => {
         cy.wrap(response.body.id).as("createdGistId");
       });
@@ -52,6 +55,42 @@ describe("Read Gist Information", () => {
 
         // Assert if the message equals "Not Found"
         expect(response.body.message).to.equal("Not Found");
+      });
+    });
+  });
+
+  /**
+   * These tests were performed during the interview
+   */
+  it.only("create private gist and access it without logging in", function () {
+    cy.get("@createdGistId").then((gistId) => {
+      // Make an API request to get the Gists List
+      cy.getGists("public").then((response) => {
+        let exists = false;
+        response.body.forEach((responseBody) => {
+          if(responseBody.id === gistId){
+            exists = true;
+          }
+        })
+
+        // i could optimise the above code as
+        // const exists = response.body.some((responseBody) => responseBody.id === gistId);
+        expect(exists).to.be.true;
+      });
+    });
+  });
+
+  it.only("create public gist and check if it's accessible", function () {
+    cy.get("@createdGistId").then((gistId) => {
+      // Make an API request to get the Gists List
+      cy.getGists("public").then((response) => {
+        let exists = false;
+        response.body.forEach((responseBody) => {
+          if(responseBody.id === gistId){
+            exists = true;
+          }
+        })
+        expect(exists).to.be.true;
       });
     });
   });
