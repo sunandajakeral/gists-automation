@@ -66,14 +66,28 @@ Cypress.Commands.add("getGistsListRequest", (gist, failOnStatusCode = true) => {
   });
 });
 
-Cypress.Commands.add("getGistsListAuthenticatedUser", (failOnStatusCode = true) => {
-  // Make an API request to get the Gists List
-  cy.request({
-    method: "GET",
-    url: `${apiUrl}/gists`,
-    failOnStatusCode: failOnStatusCode,
-    headers: {
-      Authorization: `token ${accessToken}`,
-    },
-  });
+Cypress.Commands.add(
+  "getGistsListAuthenticatedUser",
+  (failOnStatusCode = true) => {
+    // Make an API request to get the Gists List
+    cy.request({
+      method: "GET",
+      url: `${apiUrl}/gists`,
+      failOnStatusCode: failOnStatusCode,
+      headers: {
+        Authorization: `token ${accessToken}`,
+      },
+    });
+  }
+);
+
+Cypress.Commands.add("assertGistCreation", (response, gistData) => {
+  // Assert that the response status code is 201 (Created)
+  expect(response.status).to.eq(201);
+  // Validate the response data
+  expect(response.body.description).to.eq(gistData.description);
+  // Check that the response has file content as expected
+  for (const fileName in gistData.files) {
+    expect(response.body.files[fileName].content).to.deep.equal(gistData.files[fileName].content);
+  }
 });
