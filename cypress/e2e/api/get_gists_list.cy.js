@@ -75,7 +75,7 @@ describe("Read Gist Information", () => {
 
         // i could optimise the above code as
         // const exists = response.body.some((responseBody) => responseBody.id === gistId);
-        expect(exists).to.be.true;
+        expect(exists).to.be.false;
       });
     });
   });
