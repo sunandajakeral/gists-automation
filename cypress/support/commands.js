@@ -7,6 +7,8 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
+import { apiMethods } from "./constants";
+
 const accessToken = Cypress.env("GITHUB_TOKEN");
 const apiUrl = Cypress.env("API_BASE_URL");
 const authHeader =  {
@@ -18,7 +20,7 @@ Cypress.Commands.add(
   (gistData, failOnStatusCode = true) => {
     // Make an API request to create a Gist using an access token
     cy.request({
-      method: "POST",
+      method: apiMethods.POST,
       url: `${apiUrl}/gists`,
       failOnStatusCode: failOnStatusCode,
       headers: {...authHeader},
@@ -32,7 +34,7 @@ Cypress.Commands.add(
   (gistId, gistData, failOnStatusCode = true) => {
     // Make an API request to update the Gist
     cy.request({
-      method: "PATCH",
+      method: apiMethods.PATCH,
       url: `${apiUrl}/gists/${gistId}`,
       failOnStatusCode: failOnStatusCode,
       headers: {...authHeader},
@@ -54,7 +56,7 @@ Cypress.Commands.add("deleteGistRequest", (gistId, failOnStatusCode = true) => {
 Cypress.Commands.add("getGists", (gist, failOnStatusCode = true) => {
   // Make an API request to get the Gists List
   cy.request({
-    method: "GET",
+    method: apiMethods.GET,
     url: `${apiUrl}/gists/${gist}`,
     failOnStatusCode: failOnStatusCode,
     headers: {...authHeader},
@@ -66,7 +68,7 @@ Cypress.Commands.add(
   (failOnStatusCode = true) => {
     // Make an API request to get the Gists List
     cy.request({
-      method: "GET",
+      method: apiMethods.GET,
       url: `${apiUrl}/gists`,
       failOnStatusCode: failOnStatusCode,
       headers: {...authHeader},
