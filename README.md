@@ -8,7 +8,7 @@ API tests are added:
 - TC_01_creates a gist with a single file
 - TC_02_creates a gist with multiple files
 - TC_03_creates a public gist
-- TC_04_attempts to create a gist without required fields
+- TC_05_attempts to create a gist without required fields
 - TC_011_Updates contents of a file in a gist
 - TC_013_adds a new file to an existing gist
 - TC_015_attempts to update a gist that doesn’t exist
