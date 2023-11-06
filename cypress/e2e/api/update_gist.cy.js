@@ -13,7 +13,7 @@ describe("Update Gist API Tests", () => {
   it("TC_011_Updates contents of a file in a gist", function () {
     gistData.files["test-file.js"].content = "Updated";
     cy.get("@createdGistId").then((gistId) => {
-      cy.updateGistRequest(gistId, gistData).then((response) => {
+      cy.updateGist(gistId, gistData).then((response) => {
         // Assert that the response status code is 200 (OK)
         expect(response.status).to.eq(200);
 
@@ -30,7 +30,7 @@ describe("Update Gist API Tests", () => {
       content: "New file added to an existing gist",
     };
     cy.get("@createdGistId").then((gistId) => {
-      cy.updateGistRequest(gistId, gistData).then((response) => {
+      cy.updateGist(gistId, gistData).then((response) => {
         // Assert that the response status code is 200 (OK)
         expect(response.status).to.eq(200);
 
@@ -44,7 +44,7 @@ describe("Update Gist API Tests", () => {
     gistData.files["test-file-2.js"] = {
       content: "New file added to an existing gist",
     };
-      cy.updateGistRequest("", gistData, false).then((response) => {
+      cy.updateGist("", gistData, false).then((response) => {
         // Assert that the response status code is 404 (Not Found)
         expect(response.status).to.eq(404);
 

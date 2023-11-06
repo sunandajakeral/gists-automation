@@ -27,7 +27,7 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add(
-  "updateGistRequest",
+  "updateGist",
   (gistId, gistData, failOnStatusCode = true) => {
     // Make an API request to update the Gist
     cy.request({
