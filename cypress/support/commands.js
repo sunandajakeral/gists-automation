@@ -9,6 +9,9 @@
 // ***********************************************
 const accessToken = Cypress.env("GITHUB_TOKEN");
 const apiUrl = Cypress.env("API_BASE_URL");
+const authHeader =  {
+  Authorization: `token ${accessToken}`,
+};
 
 Cypress.Commands.add(
   "createGistRequest",
@@ -18,9 +21,7 @@ Cypress.Commands.add(
       method: "POST",
       url: `${apiUrl}/gists`,
       failOnStatusCode: failOnStatusCode,
-      headers: {
-        Authorization: `token ${accessToken}`,
-      },
+      headers: {...authHeader},
       body: gistData,
     });
   }
@@ -34,9 +35,7 @@ Cypress.Commands.add(
       method: "PATCH",
       url: `${apiUrl}/gists/${gistId}`,
       failOnStatusCode: failOnStatusCode,
-      headers: {
-        Authorization: `token ${accessToken}`,
-      },
+      headers: {...authHeader},
       body: gistData,
     });
   }
@@ -48,9 +47,7 @@ Cypress.Commands.add("deleteGistRequest", (gistId, failOnStatusCode = true) => {
     method: "DELETE",
     url: `${apiUrl}/gists/${gistId}`,
     failOnStatusCode: failOnStatusCode,
-    headers: {
-      Authorization: `token ${accessToken}`,
-    },
+    headers: {...authHeader},
   });
 });
 
@@ -60,9 +57,7 @@ Cypress.Commands.add("getGists", (gist, failOnStatusCode = true) => {
     method: "GET",
     url: `${apiUrl}/gists/${gist}`,
     failOnStatusCode: failOnStatusCode,
-    headers: {
-      Authorization: `token ${accessToken}`,
-    },
+    headers: {...authHeader},
   });
 });
 
@@ -74,9 +69,7 @@ Cypress.Commands.add(
       method: "GET",
       url: `${apiUrl}/gists`,
       failOnStatusCode: failOnStatusCode,
-      headers: {
-        Authorization: `token ${accessToken}`,
-      },
+      headers: {...authHeader},
     });
   }
 );
