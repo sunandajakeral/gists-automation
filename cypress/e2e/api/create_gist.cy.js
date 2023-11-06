@@ -9,16 +9,7 @@ describe("Create Gist API Tests", () => {
 
   it("TC_01_creates a gist with a single file", () => {
     cy.createGistRequest(gistData).then((response) => {
-      // Assert that the response status code is 201 (Created)
-      expect(response.status).to.eq(201);
-
-      // Validate the response data
-      expect(response.body.description).to.eq(gistData.description);
-
-      // Check that the response has file content as expected
-      expect(response.body.files["test-file.js"].content).to.deep.equal(
-        gistData.files["test-file.js"].content
-      );
+      cy.assertGistCreation(response, gistData);
     });
   });
 
@@ -27,21 +18,7 @@ describe("Create Gist API Tests", () => {
       content: "Welcome to the World!",
     };
     cy.createGistRequest(gistData).then((response) => {
-      // Assert that the response status code is 201 (Created)
-      expect(response.status).to.eq(201);
-
-      // Validate the response data
-      expect(response.body.description).to.eq(gistData.description);
-
-      // Check that the response has file content as expected
-      expect(response.body.files["test-file.js"].content).to.deep.equal(
-        gistData.files["test-file.js"].content
-      );
-
-      // Check that the response has file content as expected
-      expect(response.body.files["test-file-2.js"].content).to.deep.equal(
-        gistData.files["test-file-2.js"].content
-      );
+      cy.assertGistCreation(response, gistData);
     });
   });
 
@@ -49,16 +26,7 @@ describe("Create Gist API Tests", () => {
     gistData.public = true;
     // Make an API request to create a Gist using an access token
     cy.createGistRequest(gistData).then((response) => {
-      // Assert that the response status code is 201 (Created)
-      expect(response.status).to.eq(201);
-
-      // Validate the response data
-      expect(response.body.description).to.eq(gistData.description);
-
-      // Check that the response has file content as expected
-      expect(response.body.files["test-file.js"].content).to.deep.equal(
-        gistData.files["test-file.js"].content
-      );
+      cy.assertGistCreation(response, gistData);
     });
   });
 
