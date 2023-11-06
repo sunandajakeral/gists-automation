@@ -24,5 +24,6 @@ API tests are added:
   `git clone <repo link>`
 - Install dependencies
   `npm install`
+- Add the access token (GITHUB_TOKEN) to cypress.config.js file
 - Run tests using:
   `npm run test:e2e`
