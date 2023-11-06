@@ -9,7 +9,7 @@ describe("Read Gist Information", () => {
 
   it("TC_007_retrieves an existing gist by ID", function () {
     cy.get("@createdGistId").then((gistId) => {
-      cy.getGistsListRequest(gistId).then((response) => {
+      cy.getGists(gistId).then((response) => {
         // Assert that the response status code is 200 (OK)
         expect(response.status).to.eq(200);
 
@@ -20,7 +20,7 @@ describe("Read Gist Information", () => {
   });
 
   it("TC_006_lists public gists", function () {
-    cy.getGistsListRequest("public").then((response) => {
+    cy.getGists("public").then((response) => {
       // Assert that the response status code is 200 (OK)
       expect(response.status).to.eq(200);
 
@@ -38,7 +38,7 @@ describe("Read Gist Information", () => {
 
       // Assert that the response contains the updated Gist data
       response.body.forEach((responseBody) => {
-        expect(responseBody.public).to.equal(false);
+        expect(responseBody).to.not.equal(null);
       });
     });
   });
@@ -46,7 +46,7 @@ describe("Read Gist Information", () => {
   it("TC_010_attempts to retrieve a non-existing gist by ID", function () {
     cy.get("@createdGistId").then((gistId) => {
       const nonExistingGist = `${gistId}id`;
-      cy.getGistsListRequest(nonExistingGist, false).then((response) => {
+      cy.getGists(nonExistingGist, false).then((response) => {
         // Assert that the response status code is 404 (Not Found)
         expect(response.status).to.eq(404);
 

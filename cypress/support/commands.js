@@ -54,7 +54,7 @@ Cypress.Commands.add("deleteGistRequest", (gistId, failOnStatusCode = true) => {
   });
 });
 
-Cypress.Commands.add("getGistsListRequest", (gist, failOnStatusCode = true) => {
+Cypress.Commands.add("getGists", (gist, failOnStatusCode = true) => {
   // Make an API request to get the Gists List
   cy.request({
     method: "GET",
