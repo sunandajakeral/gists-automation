@@ -1,3 +1,4 @@
+import { notFoundError } from "../../support/locators";
 const apiUrl = Cypress.env("API_BASE_URL");
 
 describe("Read Gist Information", () => {
@@ -78,12 +79,15 @@ describe("Read Gist Information", () => {
       //   expect(exists).to.be.false;
       // });
 
-      cy.visit(`https://gist.github.com/your-username/${gistId}`);
-      cy.contains('404: Not Found').should('be.visible');
+      cy.visit(`https://gist.github.com/your-username/${gistId}`, {
+        failOnStatusCode: false,
+      });
+
+      cy.get(notFoundError).should('exist'); 
     });
   });
 
-  it.only("create public gist and check if it's accessible", function () {
+  it("create public gist and check if it's accessible", function () {
     cy.get("@createdGistId").then((gistId) => {
       // Make an API request to get the Gists List
       cy.getGists("public").then((response) => {
