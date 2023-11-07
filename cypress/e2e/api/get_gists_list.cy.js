@@ -64,19 +64,22 @@ describe("Read Gist Information", () => {
    */
   it.only("create private gist and access it without logging in", function () {
     cy.get("@createdGistId").then((gistId) => {
-      // Make an API request to get the Gists List
-      cy.getGists("public").then((response) => {
-        let exists = false;
-        response.body.forEach((responseBody) => {
-          if(responseBody.id === gistId){
-            exists = true;
-          }
-        })
+      // // Make an API request to get the Gists List
+      // cy.getGists("public").then((response) => {
+      //   let exists = false;
+      //   response.body.forEach((responseBody) => {
+      //     if(responseBody.id === gistId){
+      //       exists = true;
+      //     }
+      //   })
 
-        // i could optimise the above code as
-        // const exists = response.body.some((responseBody) => responseBody.id === gistId);
-        expect(exists).to.be.false;
-      });
+      //   // i could optimise the above code as
+      //   // const exists = response.body.some((responseBody) => responseBody.id === gistId);
+      //   expect(exists).to.be.false;
+      // });
+
+      cy.visit(`https://gist.github.com/your-username/${gistId}`);
+      cy.contains('404: Not Found').should('be.visible');
     });
   });
 
@@ -86,10 +89,10 @@ describe("Read Gist Information", () => {
       cy.getGists("public").then((response) => {
         let exists = false;
         response.body.forEach((responseBody) => {
-          if(responseBody.id === gistId){
+          if (responseBody.id === gistId) {
             exists = true;
           }
-        })
+        });
         expect(exists).to.be.true;
       });
     });
